@@ -170,7 +170,7 @@ defmodule Microsoft.Azure.Storage.SharedAccessSignature do
     stringToSign = string_to_sign(values, account_name, target_scope)
 
     signature =
-      :crypto.hmac(:sha256, account_key |> Base.decode64!(), stringToSign)
+      :crypto.mac(:hmac, :sha256, account_key |> Base.decode64!(), stringToSign)
       |> Base.encode64()
 
     values
